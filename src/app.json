@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/index/main",
+    "pages/logs/main",
+    "pages/counter/main"
+  ],
+  "tabBar": {
+    "color": "#a9b7b7",
+    "selectedColor": "#2a94ec",
+    "borderStyle":"white",
+    "list": [
+      {
+      "selectedIconPath": "static/images/market_select.png",
+      "iconPath": "static/images/market.png",
+      "pagePath": "pages/index/main",
+      "text": "乡菜"
+      },
+      {
+      "selectedIconPath": "static/images/cheaf_select.png",
+      "iconPath": "static/images/cheaf.png",
+      "pagePath": "pages/logs/main",
+      "text": "乡厨"
+      },
+      {
+      "selectedIconPath": "static/images/order_select.png",
+      "iconPath": "static/images/order.png",
+      "pagePath": "pages/counter/main",
+      "text": "订单"
+      },
+      {
+        "selectedIconPath": "static/images/person_select.png",
+        "iconPath": "static/images/person.png",
+        "pagePath": "pages/counter/main",
+        "text": "我的"
+      }
+    ]
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  }
+}
