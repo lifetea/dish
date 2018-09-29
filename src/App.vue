@@ -1,5 +1,6 @@
 <script>
 export default {
+
   created () {
     // 调用API从本地缓存中获取数据
     const logs = wx.getStorageSync('logs') || []
@@ -12,21 +13,8 @@ export default {
 </script>
 
 <style>
-  @font-face {
-    font-family: 'iconfont';  /* project id 744971 */
-    src: url('//at.alicdn.com/t/font_744971_imgaks5rqj.eot');
-    src: url('//at.alicdn.com/t/font_744971_imgaks5rqj.eot?#iefix') format('embedded-opentype'),
-    url('//at.alicdn.com/t/font_744971_imgaks5rqj.woff') format('woff'),
-    url('//at.alicdn.com/t/font_744971_imgaks5rqj.ttf') format('truetype'),
-    url('//at.alicdn.com/t/font_744971_imgaks5rqj.svg#iconfont') format('svg');
-  }
-  .iconfont {
-    font-family:'iconfont';
-    font-size:16px;
-    font-style: normal;
-    color: #9e9595;
-  }
-  page{
+  @import url(style/iconfont/iconfont.css);
+  page {
     height: 100%;
   }
 .container {

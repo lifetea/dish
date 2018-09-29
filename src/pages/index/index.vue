@@ -42,7 +42,7 @@
                         <!--<span>2</span>-->
                       </span>
                       <div class="fooddetails-button">
-                        <span class="iconfont addition_fill">
+                        <span class="iconfont icon-addition_fill">
                         </span>
                       </div>
                     </section>
@@ -454,16 +454,17 @@ a, img {
 }
 
 .fooddetails-button {
-  width: 40rpx;
-  height: 40rpx;
-  background: red;
+  position: absolute;
+  right: 40rpx;
+  bottom: 40rpx;
+  /*width: 40rpx;*/
+  /*height: 40rpx;*/
+  color: #2a94ec;
 }
 .fooddetails-button span{
-  display: inline-block;
-  width: 100%;
-  height: 100%;
+  font-size: 30px;
 }
-  .cartbutton-entitybutton_2u6UF {
+.cartbutton-entitybutton_2u6UF {
     display: -webkit-inline-flex;
     display: inline-flex;
     font-size: .346667rem;
@@ -487,4 +488,5 @@ a, img {
     vertical-align: middle;
     fill: #2396ff;
   }
+
 </style>

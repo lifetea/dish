@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/main",
     "pages/logs/main",
-    "pages/counter/main"
+    "pages/counter/main",
+    "pages/person/main"
   ],
   "tabBar": {
     "color": "#a9b7b7",
@@ -30,7 +31,7 @@
       {
         "selectedIconPath": "static/images/person_select.png",
         "iconPath": "static/images/person.png",
-        "pagePath": "pages/counter/main",
+        "pagePath": "pages/person/main",
         "text": "我的"
       }
     ]
