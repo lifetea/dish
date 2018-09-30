@@ -3,7 +3,8 @@
     "pages/index/main",
     "pages/logs/main",
     "pages/counter/main",
-    "pages/person/main"
+    "pages/person/main",
+    "pages/product/main"
   ],
   "tabBar": {
     "color": "#a9b7b7",
@@ -17,10 +18,10 @@
       "text": "乡菜"
       },
       {
-      "selectedIconPath": "static/images/cheaf_select.png",
-      "iconPath": "static/images/cheaf.png",
-      "pagePath": "pages/logs/main",
-      "text": "乡厨"
+      "selectedIconPath": "static/images/product_select.png",
+      "iconPath": "static/images/product.png",
+      "pagePath": "pages/product/main",
+      "text": "产品"
       },
       {
       "selectedIconPath": "static/images/order_select.png",

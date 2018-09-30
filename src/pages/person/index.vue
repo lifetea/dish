@@ -1,5 +1,5 @@
 <template>
-  <view class="body">
+  <div class="body">
     <div class="user-wrap">
       <div class="userinfo" @click="handleViewTap">
         <div class="logo-wrap">
@@ -10,24 +10,49 @@
         </div>
       </div>
     </div>
-  </view>
+    <wan-cell-group>
+      <wan-cell icon="book"  title="我的预约" is-link></wan-cell>
+    </wan-cell-group>
+    <wan-cell-group>
+      <wan-cell icon="order-list"  title="我的订单" is-link></wan-cell>
+      <wan-cell icon="shop-cart"  title="购物车" is-link></wan-cell>
+      <wan-cell icon="gif" is-link>
+        <div slot="title">
+          <span class="van-cell-text">活动</span>
+          <van-tag type="danger">热</van-tag>
+        </div>
+      </wan-cell>
+    </wan-cell-group>
+    <wan-cell-group>
+      <wan-cell icon="qrcode" :isLink="true" title="二维码"></wan-cell>
+      <wan-cell icon="address" :isLink="true"  title="收货地址"></wan-cell>
+      <wan-cell icon="phone" :isLink="true"  title="手机号"></wan-cell>
+    </wan-cell-group>
+    <wan-cell-group>
+      <wan-cell icon="wxapp" :isLink="true" title="我也要做小程序"></wan-cell>
+    </wan-cell-group>
+  </div>
 </template>
-
 <script>
+  import icon from '@/components/icon'
+  import cell from '@/components/cell'
+  import card from '@/components/card'
+  import cellGroup from '@/components/cellGroup'
+  export default {
+    components: {
+      icon,
+      'wan-cell': cell,
+      card,
+      'wan-cell-group': cellGroup
+    },
+    data () {
+      return {
+        logs: []
+      }
+    },
+    created () {
 
-export default {
-  components: {
-  },
-
-  data () {
-    return {
-      logs: []
     }
-  },
-
-  created () {
-
-  }
 }
 </script>
 

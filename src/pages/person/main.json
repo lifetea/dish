@@ -1,3 +1,10 @@
 {
-  "navigationBarTitleText": "我的"
+  "navigationBarTitleText": "我的",
+  "usingComponents": {
+    "van-button": "/static/vant/button/index",
+    "van-cell-group": "/static/vant/cell-group/index",
+    "van-cell": "/static/vant/cell/index",
+    "van-icon": "/static/vant/icon/index",
+    "van-tag": "/static/vant/tag/index"
+  }
 }

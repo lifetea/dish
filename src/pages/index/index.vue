@@ -42,7 +42,7 @@
                         <!--<span>2</span>-->
                       </span>
                       <div class="fooddetails-button">
-                        <span class="iconfont icon-addition_fill">
+                        <span class="iconfont icon-add">
                         </span>
                       </div>
                     </section>
