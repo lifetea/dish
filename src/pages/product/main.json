@@ -1,11 +1,13 @@
 {
-    "enablePullDownRefresh": false,
-    "disableScroll": true,
+    "enablePullDownRefresh": true,
+    "disableScroll": false,
   "navigationBarTitleText": "产品中心",
   "usingComponents": {
     "van-tabs": "/static/vant/tabs/index",
     "van-search": "/static/vant/search/index",
-    "van-tab": "/static/vant/tab/index"
+    "van-tab": "/static/vant/tab/index",
+    "van-card": "/static/vant/card/index",
+    "van-button": "/static/vant/button/index"
   }
 }
 

@@ -105,7 +105,6 @@
 
     <!--<div class="usermotto">-->
       <!--<div class="user-motto">-->
-        <!--<card :text="motto"></card>-->
       <!--</div>-->
     <!--</div>-->
 
@@ -118,7 +117,7 @@
 </template>
 
 <script>
-import card from '@/components/card'
+
 import m from '@/data/menu.js'
 export default {
   data () {
@@ -131,7 +130,6 @@ export default {
   },
 
   components: {
-    card
   },
 
   methods: {

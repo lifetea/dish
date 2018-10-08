@@ -36,13 +36,11 @@
 <script>
   import icon from '@/components/icon'
   import cell from '@/components/cell'
-  import card from '@/components/card'
   import cellGroup from '@/components/cellGroup'
   export default {
     components: {
       icon,
       'wan-cell': cell,
-      card,
       'wan-cell-group': cellGroup
     },
     data () {
