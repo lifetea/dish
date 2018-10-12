@@ -6,22 +6,23 @@
       <div v-else slot="thumb" />
     </div>
     <div class="van-card__content">
-      <view v-if="title || price || price === 0" class="van-card__row">
+      <div v-if="title || price || price === 0" class="van-card__row">
         <view v-if="title" class="van-card__title title-class">{{ title }}</view>
         <view v-if="price || price === 0" class="van-card__price price-class">{{ currency }} {{ price }}</view>
-      </view>
+      </div>
       <!--<slot wx:else name="title" />-->
       <div v-else slot="title" />
-      <view v-if="desc || num " class="van-card__row">
-        <view v-if="desc " class="van-card__desc desc-class">{{ desc }}</view>
-        <view v-if="num" class="van-card__num num-class">x {{ num }}</view>
-      </view>
-      <div v-else slot="desc" />
+      <div v-if="view || num " class="van-card__row van-view">
+        <span v-if="view " class="van-card__desc desc-class">{{ view }}浏览</span>
+        <span v-if="num" class="van-card__num num-class">{{ num }}赞</span>
+        <span v-if="num" class="van-card__num num-class">{{ num }}评论</span>
+      </div>
+      <div v-else slot="view" />
       <div  slot="tags" />
     </div>
-    <view class="van-card__footer">
+    <div class="van-card__footer">
       <slot name="footer"></slot>
-    </view>
+    </div>
   </div>
 </template>
 
@@ -33,7 +34,7 @@ export default {
       type: String,
       default: null
     },
-    desc: {
+    view: {
       type: String,
       default: null
     },
@@ -64,14 +65,23 @@ export default {
 <style lang="scss">
   .van-card {
     color: #333;
-    font-size: 16px;
+    font-size: 14px;
     background: #fafafa;
-    position: relative;
     box-sizing: border-box;
-    width: calc(50% - 20rpx);
-    height: 200px;
+    width: calc(50% - 15rpx);
     flex-direction: row;
-    margin: 5rpx 10rpx;
+    &:nth-child(odd){
+      margin: 5rpx 5rpx 5rpx 10rpx;
+    }
+    &:nth-child(even){
+      margin: 5rpx 10rpx 5rpx 5rpx;
+    }
+    .van-view{
+      span{
+        padding: 0 4rpx;
+        font-size: 12px;
+      }
+    }
   }
 
   .van-card--center,.van-card__thumb {
@@ -85,7 +95,7 @@ export default {
 
   .van-card__thumb {
     width: 100%;
-    height: 180px;
+    height: 360rpx;
     overflow: hidden;
   }
 
@@ -103,7 +113,11 @@ export default {
 
   .van-card__content {
     width: 100%;
+    padding: 4rpx 0 4rpx;
     /*background: red;*/
+    .van-card__row{
+
+    }
   }
 
   .van-card__content--center {
@@ -119,7 +133,7 @@ export default {
   }
 
   .van-card__title {
-    height: 40px;
+    height: 50rpx;
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -143,11 +157,12 @@ export default {
     flex: 1;
     min-width: 80px;
     line-height: 20px;
-    text-align: right
+    text-align: left;
   }
 
   .van-card__price {
-    font-size: 14px
+    font-size: 14px;
+    color: orangered;
   }
 
   .van-card__num {

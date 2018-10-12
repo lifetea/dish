@@ -5,12 +5,14 @@
 		"es6": true,
 		"postcss": true,
 		"minified": true,
-		"newFeature": true
+		"newFeature": true,
+		"nodeModules": false
 	},
 	"miniprogramRoot": "dist/",
 	"compileType": "miniprogram",
 	"appid": "wx36627c7ede9755f7",
 	"projectname": "xc",
+	"libVersion": "2.3.0",
 	"condition": {
 		"search": {
 			"current": -1,

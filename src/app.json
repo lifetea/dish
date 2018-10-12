@@ -1,7 +1,6 @@
 {
   "pages": [
-    "pages/index/main",
-    "pages/logs/main",
+    "pages/home/main",
     "pages/counter/main",
     "pages/person/main",
     "pages/product/main"
@@ -12,10 +11,10 @@
     "borderStyle":"white",
     "list": [
       {
-      "selectedIconPath": "static/images/market_select.png",
-      "iconPath": "static/images/market.png",
-      "pagePath": "pages/index/main",
-      "text": "乡菜"
+      "selectedIconPath": "static/images/home_select.png",
+      "iconPath": "static/images/home.png",
+      "pagePath": "pages/home/main",
+      "text": "主页"
       },
       {
       "selectedIconPath": "static/images/product_select.png",
@@ -24,10 +23,10 @@
       "text": "产品"
       },
       {
-      "selectedIconPath": "static/images/order_select.png",
-      "iconPath": "static/images/order.png",
+      "selectedIconPath": "static/images/news_select.png",
+      "iconPath": "static/images/news.png",
       "pagePath": "pages/counter/main",
-      "text": "订单"
+      "text": "新闻"
       },
       {
         "selectedIconPath": "static/images/person_select.png",

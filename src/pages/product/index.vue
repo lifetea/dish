@@ -1,44 +1,51 @@
 <template>
   <div class="main-wrap">
-    <van-search placeholder="请输入搜索关键词"   use-action-slot
-                :search="doSearch">
-      <view slot="action" @click="doSearch">搜索</view>
-    </van-search>
-    <van-tabs>
-      <van-tab title="全部"></van-tab>
-      <van-tab title="污水处理"></van-tab>
-      <van-tab title="农田排灌"></van-tab>
-      <van-tab title="工业应用"></van-tab>
-      <van-tab title="生活供水"></van-tab>
-      <van-tab title="增压类"></van-tab>
-      <van-tab title="暖通类"></van-tab>
-    </van-tabs>
+    <!--<wan-search placeholder="请输入搜索关键词"   use-action-slot-->
+                <!--:search="doSearch">-->
+      <!--<view slot="action" @click="doSearch">搜索</view>-->
+    <!--</wan-search>-->
+    <!--<wan-search></wan-search>-->
+    <div class="nav-control">
+      <van-search background="white" placeholder="请输入搜索关键词"   use-action-slot
+                  :search="doSearch">
+        <view slot="action" @click="doSearch">搜索</view>
+      </van-search>
+      <van-tabs>
+        <van-tab title="全部"></van-tab>
+        <van-tab title="污水处理"></van-tab>
+        <van-tab title="农田排灌"></van-tab>
+        <van-tab title="工业应用"></van-tab>
+        <van-tab title="生活供水"></van-tab>
+        <van-tab title="增压类"></van-tab>
+        <van-tab title="暖通类"></van-tab>
+      </van-tabs>
+    </div>
+
     <div class="prod-wrap">
-      <card
+      <wan-card
         title="IRG、IRW、立卧式管道离心泵"
         :thumb="imageURL"
-        desc="描述"
         num="2"
         price="2.00"
+        view="100"
       />
-      <card
+      <wan-card
         title="IRG、IRW、立卧式管道离心泵"
         :thumb="imageURL"
-        desc="描述"
         num="2"
         price="2.00"
+        view="100"
+      />
+      <wan-card
+        title="标题"
+        :thumb="imageURL"
+        num="2"
+        price="2.00"
+        view="100"
       />
       <card
         title="标题"
         :thumb="imageURL"
-        desc="描述"
-        num="2"
-        price="2.00"
-      />
-      <card
-        title="标题"
-        :thumb="imageURL"
-        desc="描述"
         num="2"
         price="2.00"
       />
@@ -48,6 +55,7 @@
 
 <script>
 import card from '@/components/card'
+import search from '@/components/wan/search'
 import m from '@/data/menu.js'
 export default {
   data () {
@@ -61,7 +69,9 @@ export default {
   },
 
   components: {
-    card
+    'wan-card': card,
+    'wan-search': search
+    // 'wan-field': field
   },
 
   methods: {
@@ -92,7 +102,12 @@ export default {
       console.log('clickHandle:', msg, ev)
     }
   },
-
+  async onPullDownRefresh () {
+    console.log('hhhh')
+    // to doing..
+    // 停止下拉刷新
+    wx.stopPullDownRefresh()
+  },
   created () {
     // 调用应用实例的方法获取全局数据
     this.getUserInfo()
@@ -101,8 +116,17 @@ export default {
 </script>
 
 <style lang="scss">
+  .main-wrap{
+    padding-top: 184.5rpx;
+  }
+  .nav-control{
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
   .prod-wrap{
     display: flex;
+    background: #f2f2f2;
     flex-wrap: wrap;
   }
 </style>
