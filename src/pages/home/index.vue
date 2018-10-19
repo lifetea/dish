@@ -1,45 +1,43 @@
 <template>
   <div class="main-wrap">
     <swiper class="swiper" indicator-dots="true" autoplay="true" interval="5000" duration="1000">
-      <block v-for="(item, index) in movies" :index="index" :key="key">
+      <block v-for="(item, index) in banners" :index="index" :key="key">
         <swiper-item>
-          <image :src="item.url" class="slide-image" mode="widthFix"/>
+          <image :src="item.imageUrl" class="slide-image" mode="widthFix"/>
         </swiper-item>
       </block>
     </swiper>
-    <wan-contact></wan-contact>
-    <div style="height: 100%;overflow: hidden">
-
+    <wan-contact :shopInfo="shopInfo"></wan-contact>
+    <div class="info-content">
+      <wx-parse :content="shopRich" :imageProp="{mode:'widthFix'}" />
     </div>
   </div>
 </template>
 
 <script>
+import home from '@/api/home'
 import contact from '@/components/wan/contact'
 import m from '@/data/menu.js'
+import wxParse from 'mpvue-wxparse'
+
 export default {
   data () {
+    const shopInfo = JSON.parse(wx.getStorageSync('shopInfo'))
     return {
       motto: 'Hello World',
       menu: m,
       userInfo: {},
       activeMenu: 'm4',
-      movies: [
-        {
-          url: 'https://oss.wq1516.com/goodsImage/20181011112310.jpg'
-        },
-        {
-          url: 'https://oss.wq1516.com/goodsImage/20181011112310.jpg'
-        },
-        {
-          url: 'https://oss.wq1516.com/goodsImage/20181011112310.jpg'
-        }
-      ]
+      banners: [],
+      shopInfo: shopInfo,
+      shopRich: '',
+      code: ''
     }
   },
 
   components: {
-    'wan-contact': contact
+    'wan-contact': contact,
+    'wx-parse': wxParse
   },
 
   methods: {
@@ -51,17 +49,27 @@ export default {
       this.activeMenu = 'm' + id
       console.log('hh')
     },
-    getUserInfo () {
+    doLogin () {
       // 调用登录接口
       wx.login({
-        success: () => {
-          wx.getUserInfo({
-            success: (res) => {
-              this.userInfo = res.userInfo
-            }
-          })
+        success: (res) => {
+          console.log(res)
+          console.log(res.code)
+          // wx.getUserInfo({
+          //   success: (res) => {
+          //     this.userInfo = res.userInfo
+          //   }
+          // })
         }
       })
+    },
+    async getBanner () {
+      const banners = await home.getBannerList()
+      this.banners = banners
+    },
+    async getShopRich () {
+      const shopRich = await home.getShopRich()
+      this.shopRich = shopRich.imageUrl
     },
     clickHandle (msg, ev) {
       console.log('clickHandle:', msg, ev)
@@ -70,7 +78,10 @@ export default {
 
   created () {
     // 调用应用实例的方法获取全局数据
-    this.getUserInfo()
+    this.doLogin()
+    this.getBanner()
+    this.getShopRich()
+    // this.getShopContact()
   }
 }
 </script>
@@ -82,6 +93,14 @@ export default {
       .slide-image{
         width: 100%;
       }
+    }
+  }
+  .info-content{
+    .wxParse{
+      width: 100%;
+    }
+    .img{
+      width: 100% !important;
     }
   }
 .userinfo {

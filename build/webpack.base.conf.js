@@ -45,7 +45,7 @@ module.exports = {
       'vue': 'mpvue',
       '@': resolve('src'),
       flyio: 'flyio/dist/npm/wx',
-      flyio: 'flyio/dist/npm/fly'
+      wx: resolve('src/utils/wx')
     },
     symlinks: false,
     aliasFields: ['mpvue', 'weapp', 'browser'],

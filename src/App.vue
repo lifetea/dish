@@ -1,7 +1,20 @@
 <script>
+import app from '@/api/app'
 export default {
-
+  methods: {
+    async getBanner () {
+      const banners = await app.getBannerList()
+      this.banners = banners
+    },
+    async getShopContact () {
+      const shopInfo = await app.getShopContact()
+      wx.setStorageSync('shopInfo', JSON.stringify(shopInfo))
+    }
+  },
   created () {
+    // 设定shopInfo
+    this.getShopContact()
+
     // 调用API从本地缓存中获取数据
     const logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())

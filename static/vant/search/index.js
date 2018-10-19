@@ -16,6 +16,7 @@ create({
       type: String,
       value: '#f2f2f2'
     },
+    value: String,
     maxlength: {
       type: Number,
       value: -1

@@ -1,6 +1,6 @@
 {
-    "enablePullDownRefresh": false,
-    "disableScroll": true,
+    "enablePullDownRefresh": true,
+    "disableScroll": false,
   "navigationBarTitleText": "主页"
 }
 

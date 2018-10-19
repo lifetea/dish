@@ -1,6 +1,6 @@
 {
-    "enablePullDownRefresh": false,
-    "disableScroll": true,
-  "navigationBarTitleText": "菜市"
+    "enablePullDownRefresh": true,
+    "disableScroll": false,
+  "navigationBarTitleText": "新闻"
 }
 
