@@ -10,18 +10,18 @@
         </div>
       </div>
     </div>
-    <wan-cell-group>
-      <wan-cell icon="book"  title="我的预约" is-link></wan-cell>
-    </wan-cell-group>
+    <!--<wan-cell-group>-->
+      <!--<wan-cell icon="book"  title="我的预约" is-link></wan-cell>-->
+    <!--</wan-cell-group>-->
     <wan-cell-group>
       <wan-cell icon="order-list"  title="我的订单" is-link></wan-cell>
       <wan-cell icon="shop-cart"  title="购物车" is-link></wan-cell>
-      <wan-cell icon="gif" is-link>
-        <div slot="title">
-          <span class="van-cell-text">活动</span>
-          <van-tag type="danger">热</van-tag>
-        </div>
-      </wan-cell>
+      <!--<wan-cell icon="gif" is-link>-->
+        <!--<div slot="title">-->
+          <!--<span class="van-cell-text">活动</span>-->
+          <!--<van-tag type="danger">热</van-tag>-->
+        <!--</div>-->
+      <!--</wan-cell>-->
     </wan-cell-group>
     <wan-cell-group>
       <wan-cell icon="qrcode" :isLink="true" title="二维码"></wan-cell>

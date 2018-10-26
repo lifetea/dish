@@ -11,13 +11,10 @@
                   <!--&gt;-->
         <!--<view slot="action" @click="doSearch">搜索</view>-->
       <!--</van-search>-->
-      <wan-search :isFocus=true confirmType="search" :inputValue="searchContent" placeholder="请输入搜索商品" @confirm="doSearch"></wan-search>
-      <!--@blur="blur" @focus="focus" @confirm="confirm-->
-      <!--<div v-for="(c,k) in category" :key="k" class="van-tab">-->
-        <!--<div class="van-ellipsis">{{c.typeName}}{{k}}</div>-->
-      <!--</div>-->
+      <wan-search :isFocus=true confirmType="search" :inputValue="searchContent" placeholder="请输入搜索商品" @input="searchChange" @confirm="doSearch"></wan-search>
+      <wan-tabs @change='tabChange' :tabs="category"></wan-tabs>
       <van-tabs :active="activeTab" @change="tabOnChange">
-        <van-tab v-for="(c,k) in category" :key="k" :title="c.typeName"></van-tab>
+        <van-tab  v-for="(c,k) in category" :key="k" :title="c.typeName"></van-tab>
       </van-tabs>
     </div>
     <div class="prod-wrap">
@@ -29,14 +26,16 @@
         view="100"
       />
     </div>
+    <toast></toast>
   </div>
 </template>
 
 <script>
 import product from '@/api/product'
 import card from '@/components/card'
-// import search from '@/components/wan/search'
+import tabs from '@/components/wan/tabs'
 import search from 'mpvue-weui/src/searchbar'
+import toast from 'mpvue-weui/src/toast'
 export default {
   data () {
     return {
@@ -49,14 +48,15 @@ export default {
       lastPage: 100,
       nextPage: 1,
       pageSize: 4,
-      searchContent: '111'
+      searchContent: ''
     }
   },
 
   components: {
     'wan-card': card,
-    'wan-search': search
-    // 'wan-field': field
+    'wan-search': search,
+    toast,
+    'wan-tabs': tabs
   },
 
   methods: {
@@ -66,9 +66,12 @@ export default {
     },
     doSearch (e) {
       const that = this
-      console.log(e)
-      // that.getProduct({type: 0})
+      that.getProduct({type: 0, name: that.searchContent})
       console.log('商品查询', that.searchContent)
+    },
+    searchChange (e) {
+      const that = this
+      that.searchContent = e.mp.detail.value
     },
     tabOnChange (e) {
       const that = this
@@ -76,6 +79,9 @@ export default {
       const tab = that.category[index]
       that.categoryId = tab.id
       that.getProduct({type: 1})
+    },
+    tabChange (e) {
+      console.log('父', e)
     },
     async getCategory () {
       const category = await product.getCategory()
@@ -87,9 +93,9 @@ export default {
       })
       this.category = category
     },
-    async getProduct ({type = 0}) {
+    async getProduct ({type = 0, name = ''}) {
       const that = this
-      const productData = await product.getProduct({pageNum: that.pageNum, pageSize: that.pageSize, categoryId: that.categoryId, name: that.searchContent})
+      const productData = await product.getProduct({pageNum: that.pageNum, pageSize: that.pageSize, categoryId: that.categoryId, name: name})
       if (type === 0) {
         that.productList = productData.list
       } else {
@@ -123,10 +129,12 @@ export default {
     // 停止下拉刷新
     wx.stopPullDownRefresh()
   },
-  created () {
-    // 调用应用实例的方法获取全局数据
+  onLoad () {
     this.getCategory()
     this.getProduct({type: 0})
+  },
+  created () {
+    // 调用应用实例的方法获取全局数据
   }
 }
 </script>

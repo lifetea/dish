@@ -1,30 +1,22 @@
 <template>
   <div class="van-tabs van-tabs--line">
-    <div class="van-tabs__wrap van-tabs__wrap--scrollable van-hairline--top-bottom">
+    <div class="tabs-wrap tabs-wrap--scrollable van-hairline--top-bottom">
       <scroll-view
+        scroll-x="true"
         scroll-with-animation
-        scroll-left="0"
+        :scroll-left="scrollLeft"
       >
-        <view class="van-tabs__nav van-tabs__nav--line">
-          <view  class="van-tabs__line" style="transform: translateX(0px); transition-duration: 0.2s; " />
-          <!--<view-->
-            <!--wx:for="{{ tabs }}"-->
-            <!--wx:key="index"-->
-          <!--&gt;-->
-            <!--&lt;!&ndash;<view class="van-ellipsis">{{ item.data.title }}</view>&ndash;&gt;-->
-          <!--</view>-->
-          <view class="van-tab van-tab van-tab--active van-tab--active">
-            <view class="van-ellipsis van-ellipsis">全部</view>
-          </view>
-          <view class="van-tab van-tab van-tab--active van-tab--active">
-            <view class="van-ellipsis van-ellipsis">全部</view>
-          </view>
-        </view>
+        <div ref="tabs" class="van-tabs__nav van-tabs__nav--line">
+          <div  class="van-tabs__line" :style="lineStyle" style="transition-duration: 0.2s;" />
+          <div @click="handleChange(t,k)" v-for="(t,k) in tabs" :key="k" class="van-tab " :class="activeTab == k ? 'tab-active' : ''">
+            <div class="van-ellipsis">{{t.typeName}}</div>
+          </div>
+        </div>
       </scroll-view>
     </div>
-    <view class="van-tabs__content">
+    <div class="tabs-content">
       <slot />
-    </view>
+    </div>
   </div>
 </template>
 
@@ -35,20 +27,83 @@
       return {
         inited: false,
         active: false,
-        tabs: [],
+        activeTab: 0,
         lineStyle: '',
-        scrollLeft: 0
+        scrollLeft: 100
       }
     },
     props: {
       scrollable: {
         type: Boolean,
         default: true
+      },
+      tabs: {
+        type: Array,
+        default: []
       }
     },
     methods: {
       onClick () {
         console.log('hh')
+      },
+      trigger (eventName, index) {
+        const that = this
+        that.$emit(eventName, {
+          index,
+          title: this.data.tabs[index].data.title
+        })
+      },
+      handleChange (t, k) {
+        const that = this
+        that.setActive(k)
+        console.log('子', t, k)
+        that.$emit('change', {test: 'hh'})
+        // 将当前对象 evt 传递到父组件
+      },
+      setActive (active) {
+        const that = this
+        that.activeTab = active
+        wx.createSelectorQuery().select('.van-tab').fields({
+          dataset: true,
+          size: true,
+          scrollOffset: true,
+          properties: ['scrollX', 'scrollY'],
+          computedStyle: ['margin', 'backgroundColor']
+        }, function (res) {
+          that.lineStyle = 'transform: translateX(10px);'
+          console.log(res.width)
+        }).exec()
+        this.setLine()
+        // if (active !== this.data.active) {
+        //   this.trigger('change', active)
+        //   this.setData({ active })
+        //   this.setActiveTab()
+        //   this.setLine()
+        //   this.scrollIntoView()
+        // }
+      },
+      setLine () {
+        // if (this.data.type !== 'line') {
+        //   return
+        // }
+
+        // this.getRect('.van-tab', true).then(rects => {
+        //   const rect = rects[this.data.active]
+        //   const width = this.data.lineWidth || rect.width
+        //   let left = rects
+        //     .slice(0, this.data.active)
+        //     .reduce((prev, curr) => prev + curr.width, 0)
+        //   left += (rect.width - width) / 2
+        //
+        //   this.setData({
+        //     lineStyle: `
+        //     width: ${width}px;
+        //     background-color: ${this.data.color};
+        //     transform: translateX(${left}px);
+        //     transition-duration: ${this.data.duration}s;
+        //   `
+        //   })
+        // })
       }
     }
   }
@@ -101,10 +156,13 @@
 
   .van-tabs {
     position: relative;
-    -webkit-tap-highlight-color: transparent
+    -webkit-tap-highlight-color: transparent;
+    .tabs-content{
+
+    }
   }
 
-  .van-tabs__wrap {
+  .tabs-wrap {
     top: 0;
     left: 0;
     right: 0;
@@ -112,16 +170,16 @@
     position: absolute
   }
 
-  .van-tabs__wrap--page-top {
+  .tabs-wrap--page-top {
     position: fixed
   }
 
-  .van-tabs__wrap--content-bottom {
+  .tabs-wrap--content-bottom {
     top: auto;
     bottom: 0
   }
 
-  .van-tabs__wrap--scrollable .van-tab {
+  .tabs-wrap--scrollable .van-tab {
     -webkit-box-flex: 0;
     -webkit-flex: 0 0 22%;
     flex: 0 0 22%
@@ -159,7 +217,7 @@
     border-right: none
   }
 
-  .van-tabs__nav--card .van-tab.van-tab--active {
+  .van-tabs__nav--card .van-tab.tab-active {
     color: #fff;
     background-color: #f44
   }
@@ -177,7 +235,7 @@
     padding-top: 44px
   }
 
-  .van-tabs--line .van-tabs__wrap {
+  .van-tabs--line .tabs-wrap {
     height: 44px
   }
 
@@ -185,7 +243,7 @@
     padding-top: 30px
   }
 
-  .van-tabs--card .van-tabs__wrap {
+  .van-tabs--card .tabs-wrap {
     height: 30px
   }
 
@@ -209,7 +267,7 @@
     display: block
   }
 
-  .van-tab--active {
+  .tab-active {
     color: #f44
   }
 

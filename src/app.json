@@ -2,6 +2,7 @@
   "pages": [
     "pages/home/main",
     "pages/news/main",
+    "pages/news/detail/main",
     "pages/person/main",
     "pages/product/main"
   ],
@@ -26,7 +27,7 @@
       "selectedIconPath": "static/images/news_select.png",
       "iconPath": "static/images/news.png",
       "pagePath": "pages/news/main",
-      "text": "新闻"
+      "text": "动态"
       },
       {
         "selectedIconPath": "static/images/person_select.png",

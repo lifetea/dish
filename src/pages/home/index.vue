@@ -75,12 +75,13 @@ export default {
       console.log('clickHandle:', msg, ev)
     }
   },
-
+  onLoad () {
+    this.getBanner()
+    this.getShopRich()
+  },
   created () {
     // 调用应用实例的方法获取全局数据
     this.doLogin()
-    this.getBanner()
-    this.getShopRich()
     // this.getShopContact()
   }
 }

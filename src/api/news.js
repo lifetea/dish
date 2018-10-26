@@ -6,14 +6,16 @@ const ossUrl = 'https://oss.wq1516.com/'
 
 const news = {
   ossUrl: ossUrl,
-  getCategory: () => request.get('goodsType/all?business_id=1', null, {
-    baseURL: baseUrlApi
-  }),
-  getProduct: ({pageNum = 2, pageSize = 2, categoryId = null}) => request.get('goods/all', {
+  getNews: ({pageNum = 2, pageSize = 2, typeId = ''}) => request.get('news/all', {
     business_id: 1,
     pageNum: pageNum,
     pageSize: pageSize,
-    type: categoryId
+    type: typeId
+  }, {
+    baseURL: baseUrlApi
+  }),
+  getNewsDetail: ({id = 1}) => request.get('news/selectOne', {
+    id: 1
   }, {
     baseURL: baseUrlApi
   })

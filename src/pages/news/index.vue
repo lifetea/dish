@@ -1,11 +1,11 @@
 <template>
   <div class="main-wrap">
-    <div class="prod-wrap">
-      <wan-card v-for="(p,k) in productList" :key="k"
-        :title="p.name"
-        :thumb="product.ossUrl+p.simpleUrl+'?x-oss-process=style/c400'"
+    <div class="news-wrap">
+      <wan-news v-for="(n,k) in newsList" :key="k"
+        :title="n.title"
+        :thumb="n.imgUrl+'?x-oss-process=style/cwh400'"
         num="2"
-        price="2.00"
+        zan="99"
         view="100"
       />
     </div>
@@ -13,26 +13,24 @@
 </template>
 
 <script>
-import product from '@/api/product'
-import card from '@/components/card'
-import search from '@/components/wan/search'
+import apiNews from '@/api/news'
+import wanNews from '@/components/news'
 export default {
   data () {
     return {
-      imageURL: '//fuss10.elemecdn.com/2/71/bc2cb7ce587d61b90174b5f89e171jpeg.jpeg?imageMogr/format/webp/thumbnail/!140x140r/gravity/Center/crop/140x140/',
-      motto: 'Hello World',
-      userInfo: {},
       category: {},
       activeTab: 0,
-      productList: [],
-      product: product
+      newsList: [],
+      apiNews: apiNews,
+      pageNum: 1,
+      lastPage: 100,
+      nextPage: 1,
+      pageSize: 2
     }
   },
 
   components: {
-    'wan-card': card,
-    'wan-search': search
-    // 'wan-field': field
+    'wan-news': wanNews
   },
 
   methods: {
@@ -46,34 +44,57 @@ export default {
     onChange () {
       console.log('hhh111')
     },
-    async getProduct () {
-      const productList = await product.getProduct(0)
-      this.productList = productList
+    async getNews ({type = 0, name = ''}) {
+      const that = this
+      const data = await apiNews.getNews({pageNum: that.pageNum, pageSize: that.pageSize, categoryId: that.categoryId, name: name})
+      if (type === 0) {
+        that.newsList = data.list
+      } else {
+        data.list.forEach(e => {
+          that.newsList.push(e)
+        })
+      }
+      that.lastPage = data.lastPage
+      that.pageNum = data.pageNum
+      that.nextPage = data.nextPage
     },
     clickHandle (msg, ev) {
       console.log('clickHandle:', msg, ev)
     }
   },
+  // 上拉加载
+  async onReachBottom () {
+    const that = this
+    if (that.pageNum < that.lastPage) {
+      that.pageNum = that.nextPage
+      that.getNews({type: 1})
+    }
+  },
+  // 下拉刷新
   async onPullDownRefresh () {
-    console.log('hhhh')
-    // to doing..
+    const that = this
+    that.pageNum = 1
+    that.getNews({type: 0})
     // 停止下拉刷新
     wx.stopPullDownRefresh()
   },
+  onLoad () {
+    console.log('hh')
+    this.getNews({})
+  },
   created () {
     // 调用应用实例的方法获取全局数据
-    // this.getProduct()
   }
 }
 </script>
 
 <style lang="scss">
   .main-wrap{
-
+    background: #f1f2f4;
   }
-  .prod-wrap{
+  .news-wrap{
     display: flex;
-    background: #f2f2f2;
+    background: #f1f2f4;
     flex-wrap: wrap;
   }
 </style>
