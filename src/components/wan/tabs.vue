@@ -6,9 +6,10 @@
         scroll-with-animation
         :scroll-left="scrollLeft"
       >
+        <!--:scroll-into-view=""-->
         <div ref="tabs" class="van-tabs__nav van-tabs__nav--line">
           <div  class="van-tabs__line" :style="lineStyle" style="transition-duration: 0.2s;" />
-          <div @click="handleChange(t,k)" v-for="(t,k) in tabs" :key="k" class="van-tab " :class="activeTab == k ? 'tab-active' : ''">
+          <div @click="handleChange(t,k)" v-for="(t,k) in tabs" :key="k" class="van-tab " :id="'t'+k" :class="activeTab == k ? 'tab-active' : ''">
             <div class="van-ellipsis">{{t.typeName}}</div>
           </div>
         </div>
@@ -29,7 +30,7 @@
         active: false,
         activeTab: 0,
         lineStyle: '',
-        scrollLeft: 100
+        scrollLeft: 0
       }
     },
     props: {
@@ -43,21 +44,11 @@
       }
     },
     methods: {
-      onClick () {
-        console.log('hh')
-      },
-      trigger (eventName, index) {
-        const that = this
-        that.$emit(eventName, {
-          index,
-          title: this.data.tabs[index].data.title
-        })
-      },
       handleChange (t, k) {
         const that = this
         that.setActive(k)
-        console.log('子', t, k)
-        that.$emit('change', {test: 'hh'})
+        // console.log('子', t, k)
+        that.$emit('change', {test: 'hh', categoryId: t.id})
         // 将当前对象 evt 传递到父组件
       },
       setActive (active) {
@@ -70,40 +61,14 @@
           properties: ['scrollX', 'scrollY'],
           computedStyle: ['margin', 'backgroundColor']
         }, function (res) {
-          that.lineStyle = 'transform: translateX(10px);'
-          console.log(res.width)
+          const width = res.width
+          console.log('active', active)
+          if (active >= 2) {
+            that.scrollLeft = (active - 2) * width
+          } else {
+            that.scrollLeft = 0
+          }
         }).exec()
-        this.setLine()
-        // if (active !== this.data.active) {
-        //   this.trigger('change', active)
-        //   this.setData({ active })
-        //   this.setActiveTab()
-        //   this.setLine()
-        //   this.scrollIntoView()
-        // }
-      },
-      setLine () {
-        // if (this.data.type !== 'line') {
-        //   return
-        // }
-
-        // this.getRect('.van-tab', true).then(rects => {
-        //   const rect = rects[this.data.active]
-        //   const width = this.data.lineWidth || rect.width
-        //   let left = rects
-        //     .slice(0, this.data.active)
-        //     .reduce((prev, curr) => prev + curr.width, 0)
-        //   left += (rect.width - width) / 2
-        //
-        //   this.setData({
-        //     lineStyle: `
-        //     width: ${width}px;
-        //     background-color: ${this.data.color};
-        //     transform: translateX(${left}px);
-        //     transition-duration: ${this.data.duration}s;
-        //   `
-        //   })
-        // })
       }
     }
   }

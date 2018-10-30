@@ -12,8 +12,12 @@ const home = {
   }),
   getShopRich: () => request.get('imageInfo/selectRichText?business_id=1&type=2', null, {
     baseURL: baseUrlApi
+  }),
+  doLogin: (code) => request.post('/user/login', {
+    code: code
+  }, {
+    baseURL: baseUrlApi
   })
-
   // getNews: (id) => request.get(`/xml/newscontent/${id}.xml`, null, {
   //   baseURL: baseUrlApi
   // }),

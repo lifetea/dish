@@ -5,16 +5,16 @@ export default {
     async getBanner () {
       const banners = await app.getBannerList()
       this.banners = banners
-    },
-    async getShopContact () {
-      const shopInfo = await app.getShopContact()
-      wx.setStorageSync('shopInfo', JSON.stringify(shopInfo))
     }
   },
+  onLaunch () {
+    // const token = wx.getStorageSync('token')
+    // console.log('初始化', token)
+  },
   created () {
-    // 设定shopInfo
-    this.getShopContact()
-
+    // console.log('创建')
+    // const that = this
+    // that.doLogin()
     // 调用API从本地缓存中获取数据
     const logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())

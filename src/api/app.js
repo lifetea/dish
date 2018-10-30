@@ -1,5 +1,6 @@
 import request from '../utils/request'
 const baseUrlApi = 'https://api.wq1516.com'
+// 192.168.1.135:8989   https://api.wq1516.com
 // const baseUrlDyn = 'https://dyn.ithome.com'
 // const baseUrlQuan = 'https://apiquan.ithome.com'
 
@@ -8,6 +9,11 @@ const app = {
     baseURL: baseUrlApi
   }),
   getShopContact: () => request.get('business/selectSimpleInfo?id=1', null, {
+    baseURL: baseUrlApi
+  }),
+  doLogin: (code) => request.post('/user/login', {
+    code: code
+  }, {
     baseURL: baseUrlApi
   })
   // getNews: (id) => request.get(`/xml/newscontent/${id}.xml`, null, {

@@ -22,14 +22,14 @@ import wxParse from 'mpvue-wxparse'
 
 export default {
   data () {
-    const shopInfo = JSON.parse(wx.getStorageSync('shopInfo'))
+    // const shopInfo = JSON.parse(wx.getStorageSync('shopInfo'))
     return {
       motto: 'Hello World',
       menu: m,
       userInfo: {},
       activeMenu: 'm4',
       banners: [],
-      shopInfo: shopInfo,
+      shopInfo: {},
       shopRich: '',
       code: ''
     }
@@ -49,20 +49,6 @@ export default {
       this.activeMenu = 'm' + id
       console.log('hh')
     },
-    doLogin () {
-      // 调用登录接口
-      wx.login({
-        success: (res) => {
-          console.log(res)
-          console.log(res.code)
-          // wx.getUserInfo({
-          //   success: (res) => {
-          //     this.userInfo = res.userInfo
-          //   }
-          // })
-        }
-      })
-    },
     async getBanner () {
       const banners = await home.getBannerList()
       this.banners = banners
@@ -71,17 +57,39 @@ export default {
       const shopRich = await home.getShopRich()
       this.shopRich = shopRich.imageUrl
     },
+    async getShopContact () {
+      const that = this
+      const shopInfo = await home.getShopContact()
+      that.shopInfo = shopInfo
+    },
+    async doLogin (callback) {
+      // 调用登录接口
+      console.log('调用login')
+      await wx.login({
+        success: async (res) => {
+          const result = await home.doLogin(res.code)
+          const token = result.data['token']
+          wx.setStorageSync('token', token)
+          callback()
+        }
+      })
+    },
     clickHandle (msg, ev) {
       console.log('clickHandle:', msg, ev)
     }
   },
   onLoad () {
-    this.getBanner()
-    this.getShopRich()
+
   },
   created () {
+    const that = this
+    that.doLogin(() => {
+      that.getBanner()
+      that.getShopRich()
+      that.getShopContact()
+    })
+
     // 调用应用实例的方法获取全局数据
-    this.doLogin()
     // this.getShopContact()
   }
 }

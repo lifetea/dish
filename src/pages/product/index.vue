@@ -13,9 +13,9 @@
       <!--</van-search>-->
       <wan-search :isFocus=true confirmType="search" :inputValue="searchContent" placeholder="请输入搜索商品" @input="searchChange" @confirm="doSearch"></wan-search>
       <wan-tabs @change='tabChange' :tabs="category"></wan-tabs>
-      <van-tabs :active="activeTab" @change="tabOnChange">
-        <van-tab  v-for="(c,k) in category" :key="k" :title="c.typeName"></van-tab>
-      </van-tabs>
+      <!--<van-tabs :active="activeTab" @change="tabOnChange">-->
+        <!--<van-tab  v-for="(c,k) in category" :key="k" :title="c.typeName"></van-tab>-->
+      <!--</van-tabs>-->
     </div>
     <div class="prod-wrap">
       <wan-card v-for="(p,k) in productList" :key="k"
@@ -78,10 +78,13 @@ export default {
       const index = e.target.index
       const tab = that.category[index]
       that.categoryId = tab.id
-      that.getProduct({type: 1})
     },
-    tabChange (e) {
-      console.log('父', e)
+    tabChange (obj) {
+      const that = this
+      console.log('父', obj)
+      console.log(obj.categoryId)
+      that.categoryId = obj.categoryId
+      that.getProduct(0)
     },
     async getCategory () {
       const category = await product.getCategory()
