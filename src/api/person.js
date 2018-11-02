@@ -3,7 +3,26 @@ const baseUrlApi = 'https://api.wq1516.com'
 // const baseUrlDyn = 'https://dyn.ithome.com'
 // const baseUrlQuan = 'https://apiquan.ithome.com'
 
-const com = {
+const person = {
+  getCardCode: () => request.post('/WXACode/getWXACode', {
+    width: 360,
+    "path": "string",
+  }, {
+    baseURL: baseUrlApi
+  }),
+  getShopContact: (id) => request.get('business/selectSimpleInfo', {
+    id
+  }, {
+    baseURL: baseUrlApi
+  }),
+  getShopRich: () => request.get('imageInfo/selectRichText?business_id=1&type=2', null, {
+    baseURL: baseUrlApi
+  }),
+  doLogin: (code) => request.post('/user/login', {
+    code: code
+  }, {
+    baseURL: baseUrlApi
+  })
   // getNews: (id) => request.get(`/xml/newscontent/${id}.xml`, null, {
   //   baseURL: baseUrlApi
   // }),
@@ -37,4 +56,4 @@ const com = {
   // })
 }
 
-export default com
+export default person

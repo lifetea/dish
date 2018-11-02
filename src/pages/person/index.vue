@@ -24,9 +24,10 @@
       <!--</wan-cell>-->
     </wan-cell-group>
     <wan-cell-group>
-      <wan-cell icon="qrcode" :isLink="true" title="二维码"></wan-cell>
+      <wan-cell icon="qrcode" url="../person/qrcode/main" :isLink="true" title="二维码"></wan-cell>
       <wan-cell icon="address" :isLink="true"  title="收货地址"></wan-cell>
-      <wan-cell icon="phone" :isLink="true"  title="手机号"></wan-cell>
+      <wan-cell icon="phone" url="../news/detail/main" :isLink="true"  title="手机号"></wan-cell>
+      <wan-cell icon="kehu" :isLink="true"  title="客户管理"></wan-cell>
     </wan-cell-group>
     <wan-cell-group>
       <wan-cell icon="wxapp" :isLink="true" title="我也要做小程序"></wan-cell>
@@ -35,7 +36,7 @@
 </template>
 <script>
   import icon from '@/components/icon'
-  import cell from '@/components/cell'
+  import cell from '@/components/wan/cell'
   import cellGroup from '@/components/cellGroup'
   export default {
     components: {
@@ -50,6 +51,11 @@
     },
     created () {
 
+    },
+    methods: {
+      getQrCode () {
+        console.log('商品查询')
+      }
     }
 }
 </script>

@@ -4,6 +4,7 @@
     "pages/news/main",
     "pages/news/detail/main",
     "pages/person/main",
+    "pages/person/qrcode/main",
     "pages/product/main"
   ],
   "tabBar": {

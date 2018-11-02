@@ -70,6 +70,10 @@
           type: String,
           default: null
         },
+        url: {
+          type: String,
+          default: null
+        },
         title: {
           type: String,
           default: null
@@ -93,6 +97,18 @@
       },
       data () {
         return {
+        }
+      },
+      methods: {
+        onClick () {
+          const that = this
+          const url = that.url
+          console.log('点击事件')
+          if (url != null) {
+            wx.navigateTo({ url })
+          } else {
+            this.$emit('click')
+          }
         }
       }
     }

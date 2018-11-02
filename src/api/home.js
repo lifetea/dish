@@ -7,7 +7,9 @@ const home = {
   getBannerList: () => request.get('imageInfo/selectBroadcast?business_id=1&type=1', null, {
     baseURL: baseUrlApi
   }),
-  getShopContact: () => request.get('business/selectSimpleInfo?id=1', null, {
+  getShopContact: (id) => request.get('business/selectSimpleInfo', {
+    id
+  }, {
     baseURL: baseUrlApi
   }),
   getShopRich: () => request.get('imageInfo/selectRichText?business_id=1&type=2', null, {

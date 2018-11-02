@@ -50,17 +50,17 @@ export default {
       console.log('hh')
     },
     async getBanner () {
-      const banners = await home.getBannerList()
-      this.banners = banners
+      const result = await home.getBannerList()
+      this.banners = result.data
     },
     async getShopRich () {
-      const shopRich = await home.getShopRich()
-      this.shopRich = shopRich.imageUrl
+      const result = await home.getShopRich()
+      this.shopRich = result.data.imageUrl
     },
     async getShopContact () {
       const that = this
-      const shopInfo = await home.getShopContact()
-      that.shopInfo = shopInfo
+      const reslut = await home.getShopContact(that.shop.SHOP_ID)
+      that.shopInfo = reslut.data
     },
     async doLogin (callback) {
       // 调用登录接口

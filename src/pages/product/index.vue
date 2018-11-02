@@ -87,7 +87,8 @@ export default {
       that.getProduct(0)
     },
     async getCategory () {
-      const category = await product.getCategory()
+      const result = await product.getCategory()
+      const category = result.data
       category.unshift({
         business_id: '1',
         id: '',
@@ -98,7 +99,8 @@ export default {
     },
     async getProduct ({type = 0, name = ''}) {
       const that = this
-      const productData = await product.getProduct({pageNum: that.pageNum, pageSize: that.pageSize, categoryId: that.categoryId, name: name})
+      const result = await product.getProduct({pageNum: that.pageNum, pageSize: that.pageSize, categoryId: that.categoryId, name: name})
+      const productData = result.data
       if (type === 0) {
         that.productList = productData.list
       } else {

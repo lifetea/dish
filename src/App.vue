@@ -1,11 +1,6 @@
 <script>
-import app from '@/api/app'
 export default {
   methods: {
-    async getBanner () {
-      const banners = await app.getBannerList()
-      this.banners = banners
-    }
   },
   onLaunch () {
     // const token = wx.getStorageSync('token')

@@ -46,17 +46,27 @@ export default {
     },
     async getNews ({type = 0, name = ''}) {
       const that = this
-      const data = await apiNews.getNews({pageNum: that.pageNum, pageSize: that.pageSize, categoryId: that.categoryId, name: name})
-      if (type === 0) {
-        that.newsList = data.list
+      const result = await apiNews.getNews({pageNum: that.pageNum, pageSize: that.pageSize, categoryId: that.categoryId, name: name})
+      const code = result.code
+      const data = result.data
+      if (code === 200) {
+        if (type === 0) {
+          that.newsList = data.list
+        } else {
+          data.list.forEach(e => {
+            that.newsList.push(e)
+          })
+        }
+        that.lastPage = data.lastPage
+        that.pageNum = data.pageNum
+        that.nextPage = data.nextPage
       } else {
-        data.list.forEach(e => {
-          that.newsList.push(e)
+        wx.showToast({
+          title: '失败',
+          icon: 'none',
+          duration: 2000
         })
       }
-      that.lastPage = data.lastPage
-      that.pageNum = data.pageNum
-      that.nextPage = data.nextPage
     },
     clickHandle (msg, ev) {
       console.log('clickHandle:', msg, ev)
