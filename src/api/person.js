@@ -6,7 +6,7 @@ const baseUrlApi = 'https://api.wq1516.com'
 const person = {
   getCardCode: () => request.post('/WXACode/getWXACode', {
     width: 360,
-    "path": "string",
+    'path': ''
   }, {
     baseURL: baseUrlApi
   }),
