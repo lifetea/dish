@@ -14,7 +14,7 @@ const news = {
   }, {
     baseURL: baseUrlApi
   }),
-  getNewsDetail: ({id = 1}) => request.get('news/selectOne', {
+  getNewsDetail: () => request.get('news/selectOne', {
     id: 1
   }, {
     baseURL: baseUrlApi

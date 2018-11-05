@@ -1,9 +1,9 @@
 <template>
   <div class="news-wrap">
     <div class="head">
-      <h1 class="title">伊利公开举报原创始人郑俊怀:多名高官充当保护伞 .</h1>
+      <h1 class="title">{{title}}</h1>
       <div class="info">
-        <span class="time js-time">2018-10-24 12:01</span>
+        <span class="time js-time">{{time.add_time | datefmt('YYYY-MM-DD HH:mm:ss')}}</span>
         <span class="source js-source">北京青年报</span>
       </div>
     </div>
@@ -30,10 +30,11 @@ export default {
       category: {},
       activeTab: 0,
       newsList: [],
+      title: '',
+      time: '',
       apiNews: apiNews
     }
   },
-
   components: {
     'wan-news': wanNews
   },
@@ -49,19 +50,13 @@ export default {
     onChange () {
       console.log('hhh111')
     },
-    async getNewsDetail ({type = 0, name = ''}) {
+    async getNewsDetail () {
       const that = this
-      const data = await apiNews.getNewsDetail({pageNum: that.pageNum, pageSize: that.pageSize, categoryId: that.categoryId, name: name})
-      if (type === 0) {
-        that.newsList = data.list
-      } else {
-        data.list.forEach(e => {
-          that.newsList.push(e)
-        })
-      }
-      that.lastPage = data.lastPage
-      that.pageNum = data.pageNum
-      that.nextPage = data.nextPage
+      console.log('xxxx')
+      const result = await apiNews.getNewsDetail()
+      console.log(result.data.title)
+      that.title = result.data.title
+      this.time = result.data.publishTime
     },
     clickHandle (msg, ev) {
       console.log('clickHandle:', msg, ev)
@@ -74,6 +69,8 @@ export default {
     wx.stopPullDownRefresh()
   },
   onLoad () {
+    const that = this
+    that.getNewsDetail()
     console.log('hh')
   },
   created () {

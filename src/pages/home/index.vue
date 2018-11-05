@@ -10,7 +10,7 @@
     <wan-contact :shopInfo="shopInfo"></wan-contact>
     <div class="info-content">
       <wx-parse :content="shopRich" :imageProp="{mode:'widthFix'}" />
-    </div>
+  </div>
   </div>
 </template>
 
