@@ -3,7 +3,7 @@
     <div class="head">
       <h1 class="title">{{title}}</h1>
       <div class="info">
-        <span class="time js-time">{{time.add_time | datefmt('YYYY-MM-DD HH:mm:ss')}}</span>
+        <span class="time js-time">{{time}}</span>
         <span class="source js-source">北京青年报</span>
       </div>
     </div>
@@ -54,9 +54,10 @@ export default {
       const that = this
       console.log('xxxx')
       const result = await apiNews.getNewsDetail()
-      console.log(result.data.title)
-      that.title = result.data.title
-      this.time = result.data.publishTime
+      const data = result.data
+      console.log(data.title)
+      that.title = data.title
+      this.time = that.moment(data.publishTime).format('YYYY-MM-DD hh:mm')
     },
     clickHandle (msg, ev) {
       console.log('clickHandle:', msg, ev)
